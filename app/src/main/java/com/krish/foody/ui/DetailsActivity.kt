@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navArgs
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.krish.foody.R
@@ -65,6 +67,11 @@ class DetailsActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = titles[position]
         }.attach()
+            loadBannerads()
+    }
+    private fun loadBannerads() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -127,7 +134,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
-        item.icon.setTint(ContextCompat.getColor(this, color))
+        item.icon?.setTint(ContextCompat.getColor(this, color))
     }
 
     override fun onDestroy() {

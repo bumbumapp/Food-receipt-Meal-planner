@@ -5,8 +5,8 @@
     android:id="@+id/recipesRowLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    android:layout_margin="4dp"
+    >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/row_cardView"
@@ -19,12 +19,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/strokeColor"
-        app:strokeWidth="1dp">
+        app:strokeWidth="0.1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardBackgroundColor">
+            android:background="@color/color_recipes_background">
 
             <ImageView
                 android:id="@+id/recipe_imageView"

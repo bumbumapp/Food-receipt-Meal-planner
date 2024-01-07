@@ -1,5 +1,6 @@
 package com.krish.foody.ui.fragments.recipes
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,15 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.krish.foody.R
+import com.krish.foody.adapter.ChipAdapter
 import com.krish.foody.adapter.RBtnClick
 import com.krish.foody.adapter.RecipesAdapter
 import com.krish.foody.databinding.FragmentRecipesBinding
 import com.krish.foody.models.FoodRecipe
 import com.krish.foody.models.Result
-import com.krish.foody.util.NetworkListener
-import com.krish.foody.util.NetworkResult
+import com.krish.foody.util.*
 import com.krish.foody.util.NetworkResult.*
-import com.krish.foody.util.observeOnce
 import com.krish.foody.viewmodel.MainViewModel
 import com.krish.foody.viewmodel.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 private const val TAG = "RecipesFragment"
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
+class RecipesFragment : Fragment(), RBtnClick {
 
     private val args by navArgs<RecipesFragmentArgs>()
     private lateinit var mViewModel: MainViewModel
@@ -39,6 +39,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
     private val mRecipeAdapter by lazy {
         RecipesAdapter(requireContext(), this@RecipesFragment)
     }
+
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var networkListener: NetworkListener
 
@@ -55,7 +56,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
         // Inflate the layout for this fragment
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
         setUpRecyclerView()
-        setHasOptionsMenu(true)
         mRecipesViewModel.readBackOnline.observe(viewLifecycleOwner, Observer {
             mRecipesViewModel.backOnline = it
         })
@@ -87,18 +87,37 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
                 }
             })
         })
+        binding.floatingActionButtonSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchApiData(query)
 
+                }
+                return true
+            }
 
-        binding.recipeFab.setOnClickListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+        binding.floatingActionButtonSearch.setOnClickListener {
+            binding.floatingActionButtonSearchV.visibility = View.VISIBLE
+            binding.floatingActionButtonSearchView.onActionViewExpanded()
+        }
+
+        binding.floatingActionButton.setOnClickListener {
             if (mRecipesViewModel.networkStatus) {
                 findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
             } else {
                 mRecipesViewModel.showNetworkStatus()
             }
         }
-
         return binding.root
     }
+
+
 
     private fun setUpRecyclerView() {
         binding.recyclerview.adapter = mRecipeAdapter
@@ -106,24 +125,11 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
         showShimmerEffect()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipes_menu, menu)
-        val search = menu.findItem(R.id.menu_search)
-        val searchView = search.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-    }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            searchApiData(query)
-        }
-        return true
-    }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return true
-    }
+
+
+
 
     private fun readDatabase() {
         lifecycleScope.launch {
@@ -152,13 +158,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
                     }
                 }
                 is Error -> {
-                    hideShimmerEffect()
-                    loadDataFromCache()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (response.message == "Loading..."){
+                        mViewModel.getRecipes(mRecipesViewModel.applyQueries())
+                    }else {
+                        hideShimmerEffect()
+                        loadDataFromCache()
+                        Toast.makeText(
+                            requireContext(),
+                            response.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
                 is Loading -> {
@@ -173,6 +183,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
         showShimmerEffect()
         mViewModel.searchRecipes(mRecipesViewModel.applySearchQuery(searchQuery))
         mViewModel.searchedRecipesResponse.observe(viewLifecycleOwner, Observer { response ->
+            binding.floatingActionButtonSearchV.visibility = View.GONE
             when (response) {
                 is Success -> {
                     hideShimmerEffect()
@@ -222,19 +233,24 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener, RBtnClick {
     private fun showShimmerEffect() {
         binding.shimmerFrameLayout.startShimmer()
         binding.recyclerview.visibility = View.GONE
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
+
     }
 
     private fun hideShimmerEffect() {
-        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.GONE
         binding.recyclerview.visibility = View.VISIBLE
 
     }
 
     override fun getRecipeOnClick(bundle: Result) {
-        Log.d(TAG, "getRecipeOnClick: $bundle")
-        val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(bundle)
-        findNavController().navigate(action)
+        AdsLoader.showAds(requireActivity()) {
+            val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(bundle)
+            findNavController().navigate(action)
+        }
     }
+
+
 
 
 }

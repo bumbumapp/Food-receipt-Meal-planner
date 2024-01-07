@@ -38,3 +38,4 @@ data class Result(
     @SerializedName("veryHealthy")
     val veryHealthy: Boolean
 ) : Parcelable
+

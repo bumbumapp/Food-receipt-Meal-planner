@@ -23,7 +23,7 @@ interface RBtnClick
     fun getRecipeOnClick(bundle : Result)
 }
 
-class RecipesAdapter(private val context : Context , private val listener : RecipesFragment) : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() {
+class RecipesAdapter(private val context : Context , private val listener : RBtnClick) : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() {
 
     private var recipes = emptyList<Result>()
 

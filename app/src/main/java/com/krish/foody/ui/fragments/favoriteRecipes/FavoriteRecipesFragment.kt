@@ -36,7 +36,7 @@ class FavoriteRecipesFragment : Fragment(), BtnClick {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
+
         binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
         setupRecyclerView()
 

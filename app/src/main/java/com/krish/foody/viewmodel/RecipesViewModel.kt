@@ -18,6 +18,7 @@ import com.krish.foody.util.Constants.Companion.QUERY_FILL_INGREDIENTS
 import com.krish.foody.util.Constants.Companion.QUERY_NUMBER
 import com.krish.foody.util.Constants.Companion.QUERY_SEARCH
 import com.krish.foody.util.Constants.Companion.QUERY_TYPE
+import com.krish.foody.util.Constants.Companion.apiKeyIndex
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -71,7 +72,7 @@ class RecipesViewModel @Inject constructor(
         val queries: HashMap<String, String> = HashMap()
 
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
-        queries[QUERY_API_KEY] = API_KEY
+        queries[QUERY_API_KEY] = API_KEY[apiKeyIndex]
         if (this@RecipesViewModel::mealAndDiet.isInitialized) {
             queries[QUERY_TYPE] = mealAndDiet.selectedMealType
             queries[QUERY_DIET] = mealAndDiet.selectedDietType
@@ -88,7 +89,7 @@ class RecipesViewModel @Inject constructor(
         val queries: HashMap<String, String> = HashMap()
         queries[QUERY_SEARCH] = searchQuery
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
-        queries[QUERY_API_KEY] = API_KEY
+        queries[QUERY_API_KEY] = API_KEY[apiKeyIndex]
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[QUERY_FILL_INGREDIENTS] = "true"
         return queries

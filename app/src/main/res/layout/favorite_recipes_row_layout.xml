@@ -5,8 +5,8 @@
     android:id="@+id/favoriteRecipesRowLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    android:background="@color/color_recipes_background"
+    android:layout_margin = "4dp" >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/favorite_row_cardView"
@@ -19,12 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/strokeColor"
-        app:strokeWidth="1dp">
+        app:cardBackgroundColor="@color/darker"
+        app:strokeWidth="0.1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardBackgroundColor">
+            android:background="@color/darker">
 
             <ImageView
                 android:id="@+id/favorite_recipe_imageView"
@@ -132,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="Vegan"
+                android:textColor="#99FDF1F1"
                 android:textAlignment="center"
                 app:layout_constraintStart_toEndOf="@+id/favorite_clock_textView"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_leaf_imageView" />

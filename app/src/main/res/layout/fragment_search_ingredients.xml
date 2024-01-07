@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.SearchIngreientFragment">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/placeholder_row_layout" />
+
+                <include layout="@layout/placeholder_row_layout" />
+
+                <include layout="@layout/placeholder_row_layout" />
+
+                <include layout="@layout/placeholder_row_layout" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            android:background="@color/darker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/recipe_fab_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white"
+            android:backgroundTint="@color/darker"
+            android:contentDescription="@string/recipesbottomsheet" />
+
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:alpha="0.4"
+            android:src="@drawable/ic_sad"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.38" />
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="No Internet Connection"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:alpha="0.5"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="@+id/error_image"
+            app:layout_constraintRight_toRightOf="@+id/error_image"
+            app:layout_constraintTop_toBottomOf="@+id/error_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/darker"
+        android:fitsSystemWindows="true"
+        android:visibility="visible"
+        >
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:padding="10dp">
+
+            <!-- EditText with rounded shape -->
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext_bg"
+                android:hint="Enter an ingredient"
+                android:inputType="text"
+                android:textColorHint="#878181"
+                android:padding="12dp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="0dp"/>
+
+            <!-- Add ImageButton -->
+            <ImageView
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext_bg"
+                android:src="@drawable/baseline_add_24"
+                android:contentDescription="Add"
+                android:padding="10dp"
+                app:tint="@color/white"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_ingredient"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:layout_below="@+id/linear3"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You have Ingredients"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#FF9800"/>
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/selected_chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="false"
+                app:selectionRequired="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suggestions Ingredient"
+            android:layout_below="@+id/my_ingredient"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:textColor="#FF9800"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textv"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="24dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="false"
+                app:singleSelection="false" />
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/recipe_fab_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_search"
+            app:tint="@color/white"
+            android:backgroundTint="@color/darker"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_suggestions"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:background="@color/darker"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linear3"/>
+    </RelativeLayout>
+</LinearLayout>

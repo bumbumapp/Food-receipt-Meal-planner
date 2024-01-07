@@ -106,7 +106,7 @@ class FavoriteRecipeAdapter(
         currentRecipe: FavoritesEntity
     ) {
         if (selectedRecipes.contains(currentRecipe)) {
-            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimary)
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.green)
         } else {
             changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
         }
@@ -116,11 +116,11 @@ class FavoriteRecipeAdapter(
     private fun applySelection(holder: FavoriteRecipeViewHolder, currentRecipe: FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
-            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.green)
             applyActionModeTitle()
         } else {
             selectedRecipes.add(currentRecipe)
-            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimary)
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.green)
             applyActionModeTitle()
         }
     }

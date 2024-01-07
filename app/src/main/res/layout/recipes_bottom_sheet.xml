@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardBackgroundColor"
+    android:background="#ffffff"
     tools:context=".ui.fragments.recipes.bottomsheet.RecipesBottomSheet">
 
     <TextView
@@ -256,7 +256,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/apply"
         android:textAllCaps="false"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/cardBackgroundColor"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

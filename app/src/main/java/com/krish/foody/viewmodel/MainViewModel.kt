@@ -32,7 +32,7 @@ class MainViewModel @Inject constructor(
 
     val readFoodJoke: LiveData<List<FoodJokeEntity>> = repository.local.readFoodJoke().asLiveData()
 
-    fun insertRecipes(recipesEntity: RecipesEntity) =
+    private fun insertRecipes(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRecipes(recipesEntity)
         }
@@ -113,6 +113,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
     private suspend fun getFoodJokeSafeCall(apiKey: String) {
         foodJokeResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
@@ -147,7 +148,7 @@ class MainViewModel @Inject constructor(
                 return NetworkResult.Error("Timeout")
             }
             response.code() == 402 -> {
-                return NetworkResult.Error("API Key Limited.")
+                return NetworkResult.Error("Loading...")
             }
             response.body()!!.results.isNullOrEmpty() -> {
                 return NetworkResult.Error("Recipes not found.")
