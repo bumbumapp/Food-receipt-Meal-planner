@@ -106,6 +106,7 @@ class MainViewModel @Inject constructor(
                     offlineCacheRecipes(foodRecipe)
                 }
             } catch (e: Exception) {
+                android.util.Log.e("MainViewModel", "getRecipes failed", e)
                 recipeResponse.value = NetworkResult.Error("Recipes not found")
             }
         } else {

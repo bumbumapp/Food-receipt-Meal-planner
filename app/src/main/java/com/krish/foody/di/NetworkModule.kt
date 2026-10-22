@@ -8,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -28,8 +28,9 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideConverterFactory() : MoshiConverterFactory{
-        return MoshiConverterFactory.create()
+    fun provideConverterFactory() : GsonConverterFactory {
+        // Models use Gson @SerializedName; Moshi 1.15 (pulled by converter-moshi 2.11) rejects Kotlin classes without kotlin-reflect.
+        return GsonConverterFactory.create()
     }
 
 
@@ -37,12 +38,12 @@ object NetworkModule {
     @Provides
     fun provideRetrofitInstance(
         okHttpClient: OkHttpClient,
-        moshiConverterFactory: MoshiConverterFactory
+        converterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(moshiConverterFactory)
+            .addConverterFactory(converterFactory)
             .build()
     }
 
