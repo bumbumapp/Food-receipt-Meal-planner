@@ -8,8 +8,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import com.krish.foody.AdsConsent
+import com.krish.foody.BannerHelper
 import com.krish.foody.R
 import com.krish.foody.databinding.ActivityMainBinding
 import com.krish.foody.util.AdsLoader
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Foody)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        AdsLoader.displayInterstitial(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,9 +36,10 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun loadBannerads() {
-        MobileAds.initialize(this) {}
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        AdsConsent.gather(this) {
+            AdsLoader.displayInterstitial(this)
+            binding.adView.post { BannerHelper.load(this, binding.adView) }
+        }
     }
 
 

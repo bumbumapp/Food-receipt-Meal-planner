@@ -8,11 +8,34 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class NetworkListener : ConnectivityManager.NetworkCallback() {
     private val isNetworkAvailable = MutableStateFlow(false)
+    private var registered = false
+
+    /**
+     * Registering the same callback twice throws IllegalArgumentException, and every fragment
+     * view used to register a new one without unregistering (TooManyRequestsException after ~100).
+     */
+    internal fun markRegistered(): Boolean {
+        if (registered) return false
+        registered = true
+        return true
+    }
+
+    fun unregister(context: Context) {
+        if (!registered) return
+        registered = false
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        try {
+            connectivityManager.unregisterNetworkCallback(this)
+        } catch (e: IllegalArgumentException) {
+            // not registered
+        }
+    }
 
     fun checkNetworkAvailability(context: Context): MutableStateFlow<Boolean> {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManager.registerDefaultNetworkCallback(this)
+        if (markRegistered()) connectivityManager.registerDefaultNetworkCallback(this)
 
         val network = connectivityManager.activeNetwork
         if (network == null) {

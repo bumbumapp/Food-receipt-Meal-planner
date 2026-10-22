@@ -8,93 +8,111 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    namespace 'com.krish.foody'
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.bumbumapps.foodreceiptmealplanner"
         minSdk 26
-        renderscriptSupportModeEnabled true
-        targetSdk 33
-        versionCode 4
-        versionName "1.0.3"
+        targetSdk 36
+        // Play has an unsent production draft with versionCode 4, so this release uses 5.
+        versionCode 5
+        versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
         viewBinding true
+        buildConfig true
+        resValues true
     }
 
     buildTypes {
+        debug {
+            // Google sample IDs: debug builds never request live ads.
+            manifestPlaceholders = [admobAppId: "ca-app-pub-3940256099942544~3347511713"]
+            resValue "string", "admob_banner_id", "ca-app-pub-3940256099942544/9214589741"
+            resValue "string", "admob_interstitial_id", "ca-app-pub-3940256099942544/1033173712"
+        }
         release {
+            manifestPlaceholders = [admobAppId: "ca-app-pub-8444865753152507~9850591788"]
+            resValue "string", "admob_banner_id", "ca-app-pub-8444865753152507/7730010692"
+            resValue "string", "admob_interstitial_id", "ca-app-pub-8444865753152507/5632715995"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
+    }
+    lint {
+        abortOnError false
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.core:core-ktx:1.17.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
     // Navigation Component
-    def nav_version = "2.5.3"
+    def nav_version = "2.9.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //Room Component
-    implementation "androidx.room:room-runtime:2.5.1"
-    kapt "androidx.room:room-compiler:2.5.1"
-    implementation "androidx.room:room-ktx:2.5.1"
+    implementation "androidx.room:room-runtime:2.7.2"
+    kapt "androidx.room:room-compiler:2.7.2"
+    implementation "androidx.room:room-ktx:2.7.2"
 
 
     //DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences:1.1.7"
 
 
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.57.2")
 
 
     //LifeCycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.9.4"
 
     //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
 
     //Image Loading Library Coil
     implementation "io.coil-kt:coil:1.4.0"
 
     //Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.13.2'
 
     //Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     //Jsoup
-    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'org.jsoup:jsoup:1.21.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.google.android.gms:play-services-ads:25.5.0'
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
 
 }

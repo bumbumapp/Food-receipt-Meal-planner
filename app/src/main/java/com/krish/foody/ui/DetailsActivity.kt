@@ -10,8 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navArgs
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import com.krish.foody.BannerHelper
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.krish.foody.R
@@ -70,13 +69,13 @@ class DetailsActivity : AppCompatActivity() {
             loadBannerads()
     }
     private fun loadBannerads() {
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        binding.adView.post { BannerHelper.load(this, binding.adView) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         menuItem = menu!!.findItem(R.id.save_to_favorite_menu)
+        menu.findItem(R.id.privacy_options_menu)?.isVisible = com.krish.foody.AdsConsent.isPrivacyOptionsRequired(this)
         checkSavedRecipes(menuItem)
         return true
     }
@@ -84,6 +83,8 @@ class DetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
+        } else if (item.itemId == R.id.privacy_options_menu) {
+            com.krish.foody.AdsConsent.showPrivacyOptions(this)
         } else if (item.itemId == R.id.save_to_favorite_menu && !recipeSaved) {
             saveToFavorites(item)
         } else if (item.itemId == R.id.save_to_favorite_menu && recipeSaved) {

@@ -61,7 +61,7 @@ class RecipesFragment : Fragment(), RBtnClick {
         })
 
         networkListener = NetworkListener()
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
                     Log.d("NetworkListener", status.toString())
@@ -253,4 +253,9 @@ class RecipesFragment : Fragment(), RBtnClick {
 
 
 
+
+    override fun onDestroyView() {
+        networkListener.unregister(requireContext())
+        super.onDestroyView()
+    }
 }
