@@ -172,7 +172,7 @@
             android:id="@+id/textv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Suggestions Ingredient"
+            android:text="Suggested ingredients"
             android:layout_below="@+id/my_ingredient"
             android:textSize="18sp"
             android:layout_margin="10dp"

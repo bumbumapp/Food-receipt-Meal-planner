@@ -2,18 +2,18 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">@color/darker</color>
-    <color name="colorAccent">#9D46FF</color>
+    <color name="colorAccent">#E8590C</color>
 
-    <color name="teal_200">#4CAF50</color>
-    <color name="teal_700">#4CAF50</color>
+    <color name="teal_200">#E8590C</color>
+    <color name="teal_700">#C2410C</color>
     <color name="blur_background_color">@color/color_recipes_background</color>
-    <color name="white">#151B20</color>
-    <color name="lightGray">#A9CC82</color>
+    <color name="white">#0E1222</color>
+    <color name="lightGray">#F3F4F8</color>
     <color name="mediumGray">#D1D1D1</color>
     <color name="lightMediumGray">#80D1D1D1</color>
-    <color name="darkGray">#373553</color>
+    <color name="darkGray">#5B6275</color>
     <color name="dark">#313C44</color>
-    <color name="darker">#ffffff</color>
+    <color name="darker">#F3F4F8</color>
     <color name="black">#000000</color>
     <color name="red">#FF4646</color>
     <color name="yellow">#FFC114</color>
@@ -26,36 +26,36 @@
     <color name="descriptionColor">@color/darkGray</color>
 
     <color name="actionBarBackgroundColor">@color/colorPrimary</color>
-    <color name="strokeColor">#373553</color>
-    <color name="cardBackgroundLightColor">#10B89BDF</color>
+    <color name="strokeColor">#00000000</color>
+    <color name="cardBackgroundLightColor">#FFF1E8</color>
     <color name="cardBackgroundColor">@color/color_recipes_background</color>
-    <color name="titleColor">#FFC107</color>
+    <color name="titleColor">#0E1222</color>
 
     // Custom Chip Style
-    <color name="checkedChipBackgroundColor">#221f35</color>
-    <color name="chipBackgroundColor">#3C387C</color>
-    <color name="checkedChipTextColor">@color/colorPrimary</color>
-    <color name="chipTextColor">#BAAC35</color>
+    <color name="checkedChipBackgroundColor">#E8590C</color>
+    <color name="chipBackgroundColor">#FFFFFF</color>
+    <color name="checkedChipTextColor">#FFFFFF</color>
+    <color name="chipTextColor">#0E1222</color>
 
     <color name="statusBarColor">@color/colorPrimaryDark</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualActionBarColor">@color/white</color>
 
     // custom bottomNavigationView Style
-    <color name="bottomNavBackground">#ffffff</color>
+    <color name="bottomNavBackground">#FFFFFF</color>
     <color name="bottomNavItemColor">@color/white</color>
-    <color name="bottomNavCheckedItemColor">#FF9A00</color>
-    <color name="color_recipes_background">#F8F8F8</color>
+    <color name="bottomNavCheckedItemColor">#E8590C</color>
+    <color name="color_recipes_background">#FFFFFF</color>
 
 </resources>
 <!--<resources>-->
 <!--<color name="purple_200">#FFBB86FC</color>-->
 <!--<color name="purple_500">#FF6200EE</color>-->
 <!--<color name="purple_700">#FF3700B3</color>-->
-<!--<color name="teal_200">#FF03DAC5</color>-->
-<!--<color name="teal_700">#FF018786</color>-->
+<!--<color name="teal_200">#E8590C</color>-->
+<!--<color name="teal_700">#C2410C</color>-->
 <!--<color name="black">#FF000000</color>-->
-<!--<color name="white">#FFFFFFFF</color>-->
+<!--<color name="white">#0E1222</color>-->
 
 <!--<color name="themePrimary">#FF9A00</color>-->
 <!--<color name="red">#FF4646</color>-->
@@ -79,14 +79,14 @@
 <!--<color name="blurIconTintColorDark">#000000</color>-->
 
 <!--// Custom Chip Style-->
-<!--<color name="lightGray">#F9F9F9</color>-->
+<!--<color name="lightGray">#F3F4F8</color>-->
 <!--<color name="mediumGray">#D1D1D1</color>-->
 <!--<color name="lightMediumGray">#80D1D1D1</color>-->
-<!--<color name="darkGray">#4B4B4B</color>-->
+<!--<color name="darkGray">#5B6275</color>-->
 
-<!--<color name="checkedChipBackgroundColor">#20FF9A00</color>-->
-<!--<color name="chipBackgroundColor">@color/lightGray</color>-->
-<!--<color name="checkedChipTextColor">@color/themePrimary</color>-->
-<!--<color name="chipTextColor">@color/darkGray</color>-->
+<!--<color name="checkedChipBackgroundColor">#E8590C</color>-->
+<!--<color name="chipBackgroundColor">#FFFFFF</color>-->
+<!--<color name="checkedChipTextColor">#FFFFFF</color>-->
+<!--<color name="chipTextColor">#0E1222</color>-->
 
 <!--</resources>-->

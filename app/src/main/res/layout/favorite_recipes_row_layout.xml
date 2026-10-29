@@ -45,7 +45,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
                 android:ellipsize="end"
-                android:fontFamily="@font/courgette"
+                android:fontFamily="@font/jakarta_bold"
                 android:maxLines="2"
                 android:text="Lorem Ipsum"
                 android:textColor="@color/titleColor"
