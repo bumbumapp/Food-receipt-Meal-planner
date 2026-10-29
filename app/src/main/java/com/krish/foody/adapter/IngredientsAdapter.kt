@@ -45,7 +45,7 @@ class IngredientsAdapter(private val context: Context) :
             }
 
             ingredientName.text = currentIngredient.name
-            ingredientAmount.text = currentIngredient.amount.toString()
+            ingredientAmount.text = com.krish.foody.util.AmountFormat.format(currentIngredient.amount)
             ingredientUnit.text = currentIngredient.unit
             ingredientConsistency.text = currentIngredient.consistency
             ingredientOriginal.text = currentIngredient.original
