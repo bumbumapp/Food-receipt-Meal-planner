@@ -36,6 +36,10 @@ data class Result(
     @SerializedName("vegetarian")
     val vegetarian: Boolean,
     @SerializedName("veryHealthy")
-    val veryHealthy: Boolean
+    val veryHealthy: Boolean,
+    // Step-by-step instructions (complexSearch with addRecipeInformation). Null for favorites
+    // saved by older versions; the Instructions tab then falls back to the source page.
+    @SerializedName("analyzedInstructions")
+    val analyzedInstructions: @RawValue List<AnalyzedInstruction?>? = null
 ) : Parcelable
 

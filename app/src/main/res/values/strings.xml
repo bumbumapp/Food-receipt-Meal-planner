@@ -45,4 +45,5 @@
     <string name="recipes">Recipes</string>
     <string name="privacy_options">Privacy options</string>
     <string name="whats_cooking">What\'s cooking today?</string>
+    <string name="instructions_unavailable">Instructions for this recipe are not available.</string>
 </resources>

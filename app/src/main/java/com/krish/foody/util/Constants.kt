@@ -27,6 +27,8 @@ class Constants {
         const val QUERY_TYPE = "type"
         const val QUERY_DIET = "diet"
         const val QUERY_ADD_RECIPE_INFORMATION = "addRecipeInformation"
+        // Without this complexSearch leaves analyzedInstructions empty (Instructions tab).
+        const val QUERY_ADD_RECIPE_INSTRUCTIONS = "addRecipeInstructions"
         const val QUERY_FILL_INGREDIENTS = "fillIngredients"
 
         // ROOM database

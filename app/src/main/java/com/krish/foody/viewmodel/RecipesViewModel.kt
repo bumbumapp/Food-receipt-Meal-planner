@@ -12,6 +12,7 @@ import com.krish.foody.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.krish.foody.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.krish.foody.util.Constants.Companion.DEFAULT_RECIPES_NUMBER
 import com.krish.foody.util.Constants.Companion.QUERY_ADD_RECIPE_INFORMATION
+import com.krish.foody.util.Constants.Companion.QUERY_ADD_RECIPE_INSTRUCTIONS
 import com.krish.foody.util.Constants.Companion.QUERY_API_KEY
 import com.krish.foody.util.Constants.Companion.QUERY_DIET
 import com.krish.foody.util.Constants.Companion.QUERY_FILL_INGREDIENTS
@@ -81,6 +82,7 @@ class RecipesViewModel @Inject constructor(
             queries[QUERY_DIET] = DEFAULT_DIET_TYPE
         }
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
+        queries[QUERY_ADD_RECIPE_INSTRUCTIONS] = "true"
         queries[QUERY_FILL_INGREDIENTS] = "true"
         return queries
     }
@@ -91,6 +93,7 @@ class RecipesViewModel @Inject constructor(
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[QUERY_API_KEY] = API_KEY[apiKeyIndex]
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
+        queries[QUERY_ADD_RECIPE_INSTRUCTIONS] = "true"
         queries[QUERY_FILL_INGREDIENTS] = "true"
         return queries
     }
