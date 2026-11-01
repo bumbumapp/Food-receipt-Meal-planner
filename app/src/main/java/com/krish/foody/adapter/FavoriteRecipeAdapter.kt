@@ -1,6 +1,7 @@
 package com.krish.foody.adapter
 
 
+import com.krish.foody.util.RecipeImage
 import android.content.Context
 import android.view.*
 import android.widget.ImageView
@@ -71,8 +72,12 @@ class FavoriteRecipeAdapter(
             if (currentRecipe.vegan) {
                 tvLeafVegan.setTextColor(ContextCompat.getColor(context, R.color.green))
                 leafImageView.setColorFilter(ContextCompat.getColor(context, R.color.green))
+            } else {
+                // Rows are recycled: without this a non-vegan recipe kept the green "Vegan" chip.
+                tvLeafVegan.setTextColor(tvDescription.textColors)
+                leafImageView.clearColorFilter()
             }
-            recipeImage.load(currentRecipe.image) {
+            recipeImage.load(RecipeImage.hiRes(currentRecipe.image)) {
                 crossfade(600)
                 error(R.drawable.ic_error_placeholder)
             }

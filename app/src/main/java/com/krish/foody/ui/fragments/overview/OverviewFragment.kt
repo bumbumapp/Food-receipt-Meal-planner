@@ -1,5 +1,6 @@
 package com.krish.foody.ui.fragments.overview
 
+import com.krish.foody.util.RecipeImage
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,7 +33,7 @@ class OverviewFragment : Fragment() {
         val args = arguments
         val myBundle: Result = args!!.getParcelable<Result>(RECIPE_RESULT_KEY) as Result
 
-        binding.mainImageView.load(myBundle.image)
+        binding.mainImageView.load(RecipeImage.hiRes(myBundle.image))
         binding.titleTextView.text = myBundle.title
         binding.likesTextView.text = myBundle.aggregateLikes.toString()
         binding.timeTextView.text = myBundle.readyInMinutes.toString()

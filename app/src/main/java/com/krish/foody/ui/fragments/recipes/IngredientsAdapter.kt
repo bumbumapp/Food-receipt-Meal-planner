@@ -1,5 +1,6 @@
 package com.krish.foody.ui.fragments.recipes
 
+import com.krish.foody.util.RecipeImage
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class IngredientsAdapter(
             binding.recipeTime.text = result.readyInMinutes.toString()
             binding.recipeLikes.text = result.aggregateLikes.toString()
             binding.recipesTitle.text = result.title.toString()
-            binding.image.load(result.image)
+            binding.image.load(RecipeImage.hiRes(result.image))
         }
 
         companion object {
